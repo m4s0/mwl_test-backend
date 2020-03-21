@@ -1,0 +1,12 @@
+broadway:
+    # service definition ids implementing Broadway\Serializer\Serializer
+    serializer:
+        payload:   broadway.simple_interface_serializer
+        readmodel: broadway.simple_interface_serializer
+        metadata:  broadway.simple_interface_serializer
+
+    command_handling:
+        dispatch_events: false
+
+        # a service definition id implementing Psr\Log\LoggerInterface
+        logger: null
