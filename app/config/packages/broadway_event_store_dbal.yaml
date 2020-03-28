@@ -8,6 +8,21 @@ services:
             - "@doctrine.dbal.default_connection"
             - "@broadway.serializer.payload"
             - "@broadway.serializer.metadata"
-            - "events"
+            - '%event_table_name%'
             - false
             - "@broadway.uuid.converter"
+
+    basket.command_handler:
+        class: Basket\Handler\BasketCommandHandler
+        arguments:
+            - '@basket.repository'
+        tags:
+            - { name: broadway.command_handler }
+
+    basket.repository:
+        class: Basket\Repository\BasketRepository
+        arguments:
+            - '@broadway.event_store'
+            - '@broadway.event_handling.event_bus'
+            -
+                - '@broadway.metadata_enriching_event_stream_decorator'

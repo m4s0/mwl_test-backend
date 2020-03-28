@@ -1,0 +1,5 @@
+get_products:
+    path: /product
+    defaults:
+        _controller: app.controller.product:getProducts
+    methods: [GET]

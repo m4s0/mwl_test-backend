@@ -15,4 +15,19 @@ services:
         class: Elasticsearch\Client
         factory: ['@broadway.elasticsearch.client_factory', create]
         arguments:
-            - Hosts: ['%env(resolve:ELASTICSEARCH_HOST)%']
+            -   Hosts: ['%env(resolve:ELASTICSEARCH_HOST)%']
+
+    app.read_model.repository.basket:
+        class: Broadway\ReadModel\ElasticSearch\ElasticSearchRepository
+        public: true
+        factory: ['@broadway.read_model.elasticsearch.repository_factory', create]
+        arguments:
+            - "%basket_index%"
+            - "Basket\\ReadModel\\BasketReadModel"
+
+    basket.projector.basket:
+        class: Basket\Projector\BasketProjector
+        arguments:
+            - '@app.read_model.repository.basket'
+        tags:
+            - { name: broadway.domain.event_listener }

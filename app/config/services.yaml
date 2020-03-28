@@ -1,27 +1,71 @@
-# This file is the entry point to configure your own services.
-# Files in the packages/ subdirectory configure your dependencies.
-
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
+    event_table_name: 'events'
+    basket_index: 'basket'
+    products_path: '%kernel.project_dir%/../products.json'
 
 services:
-    # default configuration for services in *this* file
     _defaults:
-        autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        autowire: false
+        autoconfigure: false
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
-    App\:
-        resource: '../src/*'
-        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+    app.subscriber.request:
+        class: App\EventSubscriber\RequestSubscriber
+        tags:
+            - { name: 'kernel.event_subscriber' }
 
-    # controllers are imported separately to make sure services can be injected
-    # as action arguments even if you don't extend any base controller class
-    App\Controller\:
-        resource: '../src/Controller'
-        tags: ['controller.service_arguments']
+    app.controller.product:
+        class: App\Controller\ProductController
+        arguments:
+            - '@product.repository'
+        public: true
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    app.controller.basket:
+        class: App\Controller\BasketController
+        arguments:
+            - '@broadway.command_handling.command_bus'
+            - '@broadway.uuid.generator'
+            - '@app.read_model.repository.basket'
+            - '@product.repository'
+        public: true
+
+    product.repository_filesystem:
+        class: Product\Repository\FileSystem
+
+    product.repository:
+        class: Product\Repository\ProductRepository
+        arguments:
+            - '%products_path%'
+            - '@product.repository_filesystem'
+
+    broadway.stack.request_id.monolog_processor:
+        class: Qandidate\Stack\RequestId\MonologProcessor
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 255 }
+            - { name: monolog.processor }
+
+    app.service.drop_and_create_read_model:
+        class: App\Service\DropAndCreateReadModel
+        arguments:
+            - "@broadway.elasticsearch.client"
+            -
+                - "%basket_index%"
+
+    app.service.drop_and_create_event_store:
+        class: App\Service\DropAndCreateEventStore
+        arguments:
+            - "@doctrine.dbal.default_connection"
+            - "@broadway.event_store.dbal"
+
+    app.command.drop_and_create_read_model:
+        class: App\Command\ReadModelDropAndCreateCommand
+        arguments:
+            - "@app.service.drop_and_create_read_model"
+        tags:
+            - { name: console.command }
+
+    app.command.drop_and_create_event_store:
+        class: App\Command\EventStoreDropAndCreateCommand
+        arguments:
+            - "@app.service.drop_and_create_event_store"
+        tags:
+            - { name: console.command }

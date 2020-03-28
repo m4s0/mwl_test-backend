@@ -38,8 +38,8 @@ RUN adduser --disabled-password app && chown -R app:app /var/app
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 # Symfony installer
-RUN wget https://get.symfony.com/cli/installer -O - | bash
-RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
+#RUN wget https://get.symfony.com/cli/installer -O - | bash
+#RUN mv /root/.symfony/bin/symfony /usr/local/bin/symfony
 
 USER app
 WORKDIR /var/app
