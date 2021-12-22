@@ -1,61 +1,106 @@
 # MadeWithLove Test - Backend
 
 #### Application
-Application runs with PHP 7.4, Symfony 5, Mysql 5.7, Elasticsearch and Broadway for CQRS+ES.
+Application runs with PHP 8.1, Symfony 5.4 LTS, Mysql 8, Elasticsearch and Broadway for CQRS+ES.
 
 Application exposes Rest API and runs on http://localhost:80
 
 #### Docker
 
-```
-cd docker
-```
+Copy `docker/.env.dist` to `docker/.env` and customise it with your parameters
 
 Build container
+
 ```
-docker-compose build
+make build
 ```
 
 Run container
+
 ```
-docker-compose up -d
+make up
 ```
 
-Enter in php container
+Stop container
+
 ```
-docker-compose run php-fpm bash
+make down
+```
+
+Remove database container
+
+```
+make rm-db
+```
+
+Display container logs
+
+```
+make logs
+```
+
+Enter into php container
+
+```
+make bash
+```
+
+#### SSH Keys
+
+Generate the SSL keys
+
+```
+make generate-keypair
 ```
 
 #### Init Application
 
-Enter in php container
-```
-docker-compose run php-fpm bash
-```
-
 install dependencies
+
 ```
 make install
-``` 
+```
 
-and init application
+initialize database
+
 ```
 make init
 ``` 
 
+Drop database
+
+```
+make drop
+```
+
 #### Tests
 
-Application has been designed using Test Driven Development.
+run all tests
 
-There are Unit tests written using PHPUnit and Broadway TestCase,
-and Functional tests written using Behat - here `app/features` you can have a look at the BDD tests
-
-Enter in php container
-```
-docker-compose run php-fpm bash
-```
-
-run tests
 ```
 make test
+```
+
+run unit tests
+
+```
+make unit
+``` 
+
+run behat tests
+
+```
+make behat
+``` 
+
+#### Coding Standards
+
+```
+make cs
+``` 
+
+#### Static Code Analysis
+
+```
+make stan
 ``` 
