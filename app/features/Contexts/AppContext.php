@@ -6,15 +6,15 @@ namespace App\Tests\Behat;
 
 use App\Service\DropAndCreateEventStore;
 use App\Service\DropAndCreateReadModel;
-use Basket\Command\PickUpBasket;
-use Basket\ValueObject\BasketId;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Session;
 use Broadway\CommandHandling\CommandBus;
 use Coduo\PHPMatcher\Factory\MatcherFactory;
-use Product\Repository\FileSystemInterface;
+use Domain\Basket\Command\PickUpBasket;
+use Domain\Basket\ValueObject\BasketId;
+use Domain\Product\Repository\FileSystemInterface;
 use RuntimeException;
 
 class AppContext implements Context

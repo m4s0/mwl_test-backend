@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Common\Service\MoneyFormatter;
-use Product\Repository\ProductRepository;
+use Domain\Common\Service\MoneyFormatter;
+use Domain\Product\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

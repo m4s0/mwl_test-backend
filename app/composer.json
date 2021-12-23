@@ -73,15 +73,13 @@
     "autoload": {
         "psr-4": {
             "App\\": "src/App",
-            "Basket\\": "src/Basket",
-            "Product\\": "src/Product",
-            "Common\\": "src/Common"
+            "Domain\\": "src/Domain/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Basket\\Tests\\": "src/Basket/Tests/",
-            "Product\\Tests\\": "src/Product/Tests/",
+            "Domain\\Basket\\Tests\\": "src/Domain/Basket/Tests/",
+            "Domain\\Product\\Tests\\": "src/Domain/Product/Tests/",
             "App\\Tests\\Behat\\": "features/Contexts/"
         }
     },

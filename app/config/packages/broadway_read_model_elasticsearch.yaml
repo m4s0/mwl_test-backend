@@ -23,10 +23,10 @@ services:
         factory: ['@broadway.read_model.elasticsearch.repository_factory', create]
         arguments:
             - "%basket_index%"
-            - "Basket\\ReadModel\\BasketReadModel"
+            - "Domain\\Basket\\ReadModel\\BasketReadModel"
 
     basket.projector.basket:
-        class: Basket\Projector\BasketProjector
+        class: Domain\Basket\Projector\BasketProjector
         arguments:
             - '@app.read_model.repository.basket'
         tags:

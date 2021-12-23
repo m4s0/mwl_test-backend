@@ -1,4 +1,5 @@
-Product\Model\Product:
+Domain\Product\Model\Product:
+    shortName: 'Product'
     attributes:
         normalization_context:
             groups: ['product_read']

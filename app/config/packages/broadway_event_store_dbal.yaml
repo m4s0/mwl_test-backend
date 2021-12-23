@@ -13,14 +13,14 @@ services:
             - "@broadway.uuid.converter"
 
     basket.command_handler:
-        class: Basket\Handler\BasketCommandHandler
+        class: Domain\Basket\Handler\BasketCommandHandler
         arguments:
             - '@basket.repository'
         tags:
             - { name: broadway.command_handler }
 
     basket.repository:
-        class: Basket\Repository\BasketRepository
+        class: Domain\Basket\Repository\BasketRepository
         arguments:
             - '@broadway.event_store'
             - '@broadway.event_handling.event_bus'

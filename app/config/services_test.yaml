@@ -1,7 +1,7 @@
 parameters:
     event_table_name: 'events_test'
     basket_index: 'basket_test'
-    products_path: '%kernel.project_dir%/src/Product/Tests/Repository/products.json'
+    products_path: '%kernel.project_dir%/src/Domain/Product/Tests/Repository/products.json'
 
 services:
     _defaults:
@@ -9,7 +9,7 @@ services:
         autoconfigure: false
 
     product.repository_filesystem:
-        class: Product\Tests\Mock\FakeFileSystem
+        class: Domain\Product\Tests\Mock\FakeFileSystem
 
     App\Tests\Behat\AppContext:
         public: true

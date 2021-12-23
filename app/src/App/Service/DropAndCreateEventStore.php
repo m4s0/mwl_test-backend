@@ -21,7 +21,7 @@ class DropAndCreateEventStore
 
     public function execute(): void
     {
-        $schemaManager = $this->connection->getSchemaManager();
+        $schemaManager = $this->connection->createSchemaManager();
         $table = $this->eventStore->configureTable(new Schema());
 
         if ($schemaManager->tablesExist([$table->getName()])) {

@@ -4,19 +4,19 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use Basket\Command\AddProductToBasket;
-use Basket\Command\Checkout;
-use Basket\Command\PickUpBasket;
-use Basket\Command\RemoveProductFromBasket;
-use Basket\Command\UpdateProductQuantity;
-use Basket\Exception\BasketException;
-use Basket\Exception\ProductNotInBasketException;
-use Basket\ValueObject\BasketId;
 use Broadway\CommandHandling\CommandBus;
 use Broadway\ReadModel\Repository;
 use Broadway\Repository\AggregateNotFoundException;
 use Broadway\UuidGenerator\UuidGeneratorInterface;
-use Product\Repository\ProductRepository;
+use Domain\Basket\Command\AddProductToBasket;
+use Domain\Basket\Command\Checkout;
+use Domain\Basket\Command\PickUpBasket;
+use Domain\Basket\Command\RemoveProductFromBasket;
+use Domain\Basket\Command\UpdateProductQuantity;
+use Domain\Basket\Exception\BasketException;
+use Domain\Basket\Exception\ProductNotInBasketException;
+use Domain\Basket\ValueObject\BasketId;
+use Domain\Product\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

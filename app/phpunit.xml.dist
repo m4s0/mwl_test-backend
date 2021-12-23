@@ -19,7 +19,7 @@
 
     <testsuites>
         <testsuite name="default">
-            <directory>src/*/Tests</directory>
+            <directory>src/*/*/Tests</directory>
         </testsuite>
     </testsuites>
 
