@@ -1,0 +1,29 @@
+api_platform:
+    title: Made With Love test
+    version: 1.0.0
+    description: Made With Love test using CQRS+ES [Broadway] and Api-Platform.
+    mapping:
+        paths:
+            - '%kernel.project_dir%/config/api-platform-resources/'
+    formats:
+        jsonld: ['application/ld+json']
+        jsonhal: ['application/hal+json']
+        jsonapi: ['application/vnd.api+json']
+        json: ['application/json']
+        xml: ['application/xml', 'text/xml']
+        yaml: ['application/x-yaml']
+        csv: ['text/csv']
+        html: ['text/html']
+    patch_formats:
+        json: ['application/merge-patch+json']
+        jsonapi: ['application/vnd.api+json']
+    swagger:
+        versions: [3]
+        api_keys:
+            apiKey:
+                name: Authorization
+                type: header
+    defaults:
+        stateless: true
+        cache_headers:
+            vary: ['Content-Type', 'Authorization', 'Origin']

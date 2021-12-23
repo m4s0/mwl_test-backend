@@ -1,24 +1,23 @@
 <?php
 
-$finder = PhpCsFixer\Finder::create()
+$finder = (new PhpCsFixer\Finder())
     ->in([
         __DIR__ . '/src',
-        __DIR__ . '/features',
-        __DIR__ . '/config',
-        __DIR__ . '/public',
+        __DIR__ . '/tests',
+        __DIR__ . '/features'
     ])
+    ->exclude('var')
 ;
 
-return PhpCsFixer\Config::create()
+return (new PhpCsFixer\Config())
     ->setLineEnding("\r\n")
     ->setRiskyAllowed(true)
     ->setRules([
-        '@Symfony' => true,
         'array_syntax' => ['syntax' => 'short'],
         'declare_strict_types' => true,
+        'no_unused_imports' => true,
         'ordered_imports' => true,
-        'ordered_class_elements' => true,
-        'psr4' => true,
     ])
     ->setFinder($finder)
+    ->setCacheFile('.php-cs-fixer.cache')
 ;

@@ -1,39 +1,60 @@
 {
-    "name": "m4s0/mwl_test-backend",
-    "description": "madewithlove test - backend",
     "type": "project",
     "license": "proprietary",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
     "require": {
-        "php": "^7.4",
+        "php": ">=8.1",
         "ext-ctype": "*",
         "ext-iconv": "*",
-        "ext-json": "*",
-        "broadway/broadway-bundle": "^0.5.0",
-        "broadway/event-store-dbal": "^0.5.0",
-        "broadway/read-model-elasticsearch": "^0.4.0",
-        "doctrine/doctrine-bundle": "^2.0",
-        "elasticsearch/elasticsearch": "5",
-        "moneyphp/money": "^3.3",
-        "qandidate/stack-request-id": "^2.0",
-        "symfony/console": "5.0.*",
-        "symfony/dotenv": "5.0.*",
-        "symfony/framework-bundle": "5.0.*",
-        "symfony/monolog-bundle": "^3.5",
-        "symfony/yaml": "5.0.*"
+        "api-platform/core": "^2.6",
+        "composer/package-versions-deprecated": "1.11.99.4",
+        "doctrine/annotations": "^1.13",
+        "lexik/jwt-authentication-bundle": "^2.14",
+        "nelmio/cors-bundle": "*",
+        "phpdocumentor/reflection-docblock": "^5.3",
+        "symfony/asset": "5.4.*",
+        "symfony/config": "5.4.*",
+        "symfony/console": "5.4.*",
+        "symfony/dependency-injection": "5.4.*",
+        "symfony/dotenv": "5.4.*",
+        "symfony/expression-language": "5.4.*",
+        "symfony/flex": "^1.17|^2",
+        "symfony/framework-bundle": "5.4.*",
+        "symfony/http-foundation": "5.4.*",
+        "symfony/http-kernel": "5.4.*",
+        "symfony/monolog-bundle": "^3.7",
+        "symfony/password-hasher": "5.4.*",
+        "symfony/property-access": "5.4.*",
+        "symfony/property-info": "5.4.*",
+        "symfony/proxy-manager-bridge": "5.4.*",
+        "symfony/runtime": "5.4.*",
+        "symfony/security-bundle": "5.4.*",
+        "symfony/serializer": "5.4.*",
+        "symfony/twig-bundle": "5.4.*",
+        "symfony/validator": "5.4.*",
+        "symfony/yaml": "5.4.*"
     },
     "require-dev": {
-        "behat/behat": "^3.6",
+        "api-platform/schema-generator": "dev-master",
+        "behat/behat": "^3.10",
         "behatch/contexts": "^3.3",
-        "coduo/php-matcher": "^4.0",
-        "friends-of-behat/mink": "^1.8",
-        "friends-of-behat/mink-browserkit-driver": "^1.4",
-        "friends-of-behat/mink-extension": "^2.4",
-        "friends-of-behat/symfony-extension": "^2.0",
-        "friendsofphp/php-cs-fixer": "^2.16",
-        "symfony/maker-bundle": "^1.15",
-        "symfony/test-pack": "^1.0"
+        "coduo/php-matcher": "^6.0",
+        "friends-of-behat/mink": "^1.9",
+        "friends-of-behat/mink-browserkit-driver": "^1.5",
+        "friends-of-behat/mink-extension": "^2.5",
+        "friends-of-behat/symfony-extension": "^2.2",
+        "friendsofphp/php-cs-fixer": "^3.3",
+        "phpstan/phpdoc-parser": "^1.2",
+        "phpstan/phpstan": "^1.2",
+        "phpunit/phpunit": "^9.5",
+        "symfony/browser-kit": "5.4.*",
+        "symfony/css-selector": "5.4.*",
+        "symfony/maker-bundle": "^1.36",
+        "symfony/web-profiler-bundle": "5.4.*"
     },
     "config": {
+        "optimize-autoloader": true,
         "preferred-install": {
             "*": "dist"
         },
@@ -58,10 +79,42 @@
         "paragonie/random_compat": "2.*",
         "symfony/polyfill-ctype": "*",
         "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php80": "*",
+        "symfony/polyfill-php74": "*",
+        "symfony/polyfill-php73": "*",
         "symfony/polyfill-php72": "*",
-        "symfony/polyfill-php71": "*",
-        "symfony/polyfill-php70": "*",
-        "symfony/polyfill-php56": "*"
+        "symfony/polyfill-php71": "*"
+    },
+    "scripts": {
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
+        },
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ],
+        "db:init": [
+            "@db:drop",
+            "@db:create",
+            "@schema:create",
+            "@schema:update"
+        ],
+        "db:create": "bin/console doctrine:database:create",
+        "schema:create": "bin/console doctrine:schema:create",
+        "db:drop": "bin/console doctrine:database:drop --if-exists --force",
+        "schema:update": "bin/console doctrine:schema:update --force",
+        "test": [
+            "@test:unit",
+            "@test:behat"
+        ],
+        "test:unit": "vendor/bin/phpunit --testdox --exclude-group=none --colors=always",
+        "test:behat": "vendor/bin/behat",
+        "cs": "vendor/bin/php-cs-fixer fix --no-interaction --diff --verbose",
+        "stan": "vendor/bin/phpstan analyse --memory-limit=-1",
+        "generate-keypair": "bin/console lexik:jwt:generate-keypair"
     },
     "conflict": {
         "symfony/symfony": "*"
@@ -69,7 +122,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "5.0.*"
+            "require": "5.4.*"
         }
     }
 }
