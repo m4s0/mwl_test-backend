@@ -13,7 +13,7 @@ class ProductWasRemovedFromBasketTest extends SerializableEventTestCase
     /**
      * @test
      */
-    public function getters_of_event_work()
+    public function getters_of_event_work(): void
     {
         $basketId = new BasketId('27da5b09-791d-4a26-8423-111dc552d145');
         $productId = '1';
@@ -26,7 +26,7 @@ class ProductWasRemovedFromBasketTest extends SerializableEventTestCase
         $this->assertEquals($productName, $event->getProductName());
     }
 
-    protected function createEvent()
+    protected function createEvent(): ProductWasRemovedFromBasket
     {
         return new ProductWasRemovedFromBasket(
             new BasketId('27da5b09-791d-4a26-8423-111dc552d145'),

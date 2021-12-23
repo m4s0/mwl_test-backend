@@ -47,7 +47,7 @@ class ProductWasRemovedFromBasket implements Serializable
         ];
     }
 
-    public static function deserialize(array $data)
+    public static function deserialize(array $data): ProductWasRemovedFromBasket
     {
         return new self(
             new BasketId($data['basketId']),

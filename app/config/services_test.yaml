@@ -1,7 +1,22 @@
+parameters:
+    event_table_name: 'events_test'
+    basket_index: 'basket_test'
+    products_path: '%kernel.project_dir%/src/Product/Tests/Repository/products.json'
+
 services:
     _defaults:
         autowire: false
         autoconfigure: false
 
+    product.repository_filesystem:
+        class: Product\Tests\Mock\FakeFileSystem
+
     App\Tests\Behat\AppContext:
         public: true
+        arguments:
+            - '@behat.mink.default_session'
+            - '@broadway.command_handling.event_dispatching_command_bus'
+            - '@app.service.drop_and_create_event_store'
+            - '@app.service.drop_and_create_read_model'
+            - '@product.repository_filesystem'
+            - '%products_path%'

@@ -1,0 +1,33 @@
+broadway:
+    read_model: broadway.read_model.elasticsearch.repository_factory
+
+services:
+    broadway.elasticsearch.client_factory:
+        class: Broadway\ReadModel\ElasticSearch\ElasticSearchClientFactory
+
+    broadway.read_model.elasticsearch.repository_factory:
+        class: Broadway\ReadModel\ElasticSearch\ElasticSearchRepositoryFactory
+        arguments:
+            - "@broadway.elasticsearch.client"
+            - "@broadway.serializer.readmodel"
+
+    broadway.elasticsearch.client:
+        class: Elasticsearch\Client
+        factory: ['@broadway.elasticsearch.client_factory', create]
+        arguments:
+            -   Hosts: ['%elasticsearch%']
+
+    app.read_model.repository.basket:
+        class: Broadway\ReadModel\ElasticSearch\ElasticSearchRepository
+        public: true
+        factory: ['@broadway.read_model.elasticsearch.repository_factory', create]
+        arguments:
+            - "%basket_index%"
+            - "Basket\\ReadModel\\BasketReadModel"
+
+    basket.projector.basket:
+        class: Basket\Projector\BasketProjector
+        arguments:
+            - '@app.read_model.repository.basket'
+        tags:
+            - { name: broadway.domain.event_listener }

@@ -1,0 +1,15 @@
+Basket\ReadModel\BasketReadModel:
+    shortName: 'Basket'
+    attributes:
+        normalization_context:
+            groups: ['basket_read']
+
+    collectionOperations:
+        get:
+            method: 'GET'
+
+    itemOperations:
+        get:
+            method: 'GET'
+        put:
+            method: 'PUT'

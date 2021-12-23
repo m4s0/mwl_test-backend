@@ -10,13 +10,16 @@ use PHPUnit\Framework\TestCase;
 use Product\Model\Product;
 use Product\Repository\FileSystem;
 use Product\Repository\ProductRepository;
+use Prophecy\PhpUnit\ProphecyTrait;
 
 class ProductRepositoryTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @test
      */
-    public function find_product_by_id()
+    public function find_product_by_id(): void
     {
         $filesystem = $this->prophesize(FileSystem::class);
         $filesystem->getFileContent('filename.json')
@@ -54,7 +57,7 @@ class ProductRepositoryTest extends TestCase
     /**
      * @test
      */
-    public function find_all_products()
+    public function find_all_products(): void
     {
         $filesystem = $this->prophesize(FileSystem::class);
         $filesystem->getFileContent('filename.json')

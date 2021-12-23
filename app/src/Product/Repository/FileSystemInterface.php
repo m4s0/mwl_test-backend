@@ -6,5 +6,5 @@ namespace Product\Repository;
 
 interface FileSystemInterface
 {
-    public function getFileContent(string $filename);
+    public function getFileContent(string $filename): bool|string;
 }

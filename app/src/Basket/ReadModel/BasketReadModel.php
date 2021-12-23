@@ -70,7 +70,7 @@ class BasketReadModel implements SerializableReadModel
         ];
     }
 
-    public static function deserialize(array $data)
+    public static function deserialize(array $data): BasketReadModel
     {
         $readModel = new self($data['basketId']);
 

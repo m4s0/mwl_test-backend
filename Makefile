@@ -39,13 +39,17 @@ dump-autoload:
 init:
 	cd docker && docker-compose run --rm php-fpm sh -c 'composer db:init'
 
+.PHONY: drop-and-create-event_store
+drop-and-create-event_store:
+	cd docker && docker-compose run --rm php-fpm sh -c 'bin/console a:e:d'
+
+.PHONY: drop-and-create-read_model
+drop-and-create-read_model:
+	cd docker && docker-compose run --rm php-fpm sh -c 'bin/console a:r:d'
+
 .PHONY: drop
 drop:
 	cd docker && docker-compose run --rm php-fpm sh -c 'composer db:drop'
-
-.PHONY: schema-update
-schema-update:
-	cd docker && docker-compose run --rm php-fpm sh -c 'composer schema:update'
 
 .PHONY: test
 test:

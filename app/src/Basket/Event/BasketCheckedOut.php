@@ -28,7 +28,7 @@ class BasketCheckedOut implements Serializable
         ];
     }
 
-    public static function deserialize(array $data)
+    public static function deserialize(array $data): BasketCheckedOut
     {
         return new self(new BasketId($data['basketId']));
     }

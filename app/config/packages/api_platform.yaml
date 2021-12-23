@@ -4,7 +4,7 @@ api_platform:
     description: Made With Love test using CQRS+ES [Broadway] and Api-Platform.
     mapping:
         paths:
-            - '%kernel.project_dir%/config/api-platform-resources/'
+            - '%kernel.project_dir%/config/api-platform/resources/'
     formats:
         jsonld: ['application/ld+json']
         jsonhal: ['application/hal+json']

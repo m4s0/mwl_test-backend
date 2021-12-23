@@ -31,7 +31,7 @@ class ProductQuantityWasUpdatedTest extends SerializableEventTestCase
         $this->assertEquals($basketId, $event->getBasketId());
     }
 
-    protected function createEvent()
+    protected function createEvent(): ProductQuantityWasUpdated
     {
         return new ProductQuantityWasUpdated(
             new BasketId('27da5b09-791d-4a26-8423-111dc552d145'),

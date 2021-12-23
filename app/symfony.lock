@@ -19,6 +19,9 @@
     "api-platform/schema-generator": {
         "version": "dev-master"
     },
+    "beberlei/assert": {
+        "version": "v3.3.2"
+    },
     "behat/behat": {
         "version": "v3.10.0"
     },
@@ -28,8 +31,50 @@
     "behat/transliterator": {
         "version": "v1.3.0"
     },
-    "behatch/contexts": {
-        "version": "3.3.0"
+    "brick/math": {
+        "version": "0.9.3"
+    },
+    "broadway/broadway": {
+        "version": "2.4.0"
+    },
+    "broadway/broadway-bundle": {
+        "version": "0.6",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.4",
+            "ref": "0601c67ff07896a752e5a72381a22254ff754ea1"
+        },
+        "files": [
+            "config/packages/broadway.yaml"
+        ]
+    },
+    "broadway/event-store-dbal": {
+        "version": "0.6",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.2",
+            "ref": "a8e44b60058a2798f65be93037aa1562f4de60eb"
+        },
+        "files": [
+            "config/packages/broadway_event_store_dbal.yaml"
+        ]
+    },
+    "broadway/read-model-elasticsearch": {
+        "version": "0.7",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.3",
+            "ref": "9afaea6bf879d010ff3d10395e2e21e02388462c"
+        },
+        "files": [
+            "config/packages/broadway_read_model_elasticsearch.yaml"
+        ]
+    },
+    "broadway/uuid-generator": {
+        "version": "1.0.0"
     },
     "coduo/php-matcher": {
         "version": "6.0.7"
@@ -58,6 +103,37 @@
             "config/routes/annotations.yaml"
         ]
     },
+    "doctrine/cache": {
+        "version": "2.1.1"
+    },
+    "doctrine/collections": {
+        "version": "1.6.8"
+    },
+    "doctrine/dbal": {
+        "version": "3.2.0"
+    },
+    "doctrine/deprecations": {
+        "version": "v0.5.3"
+    },
+    "doctrine/doctrine-bundle": {
+        "version": "2.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.4",
+            "ref": "f98f1affe028f8153a459d15f220ada3826b5aa2"
+        },
+        "files": [
+            "config/packages/doctrine.yaml",
+            "config/packages/prod/doctrine.yaml",
+            "config/packages/test/doctrine.yaml",
+            "src/Entity/.gitignore",
+            "src/Repository/.gitignore"
+        ]
+    },
+    "doctrine/event-manager": {
+        "version": "1.1.1"
+    },
     "doctrine/inflector": {
         "version": "2.0.4"
     },
@@ -67,8 +143,23 @@
     "doctrine/lexer": {
         "version": "1.2.1"
     },
+    "doctrine/persistence": {
+        "version": "2.2.3"
+    },
+    "doctrine/sql-formatter": {
+        "version": "1.1.2"
+    },
     "easyrdf/easyrdf": {
         "version": "1.1.1"
+    },
+    "elasticsearch/elasticsearch": {
+        "version": "v7.16.0"
+    },
+    "ezimuel/guzzlestreams": {
+        "version": "3.0.1"
+    },
+    "ezimuel/ringphp": {
+        "version": "1.2.0"
     },
     "fig/link-util": {
         "version": "1.2.0"
@@ -139,6 +230,9 @@
             "config/packages/lexik_jwt_authentication.yaml"
         ]
     },
+    "moneyphp/money": {
+        "version": "v4.0.3"
+    },
     "monolog/monolog": {
         "version": "2.3.5"
     },
@@ -190,6 +284,9 @@
     "phpspec/prophecy": {
         "version": "v1.15.0"
     },
+    "phpspec/prophecy-phpunit": {
+        "version": "v2.0.1"
+    },
     "phpstan/phpdoc-parser": {
         "version": "1.2.0"
     },
@@ -240,6 +337,18 @@
     "psr/log": {
         "version": "1.1.4"
     },
+    "qandidate/stack-request-id": {
+        "version": "3.0.1"
+    },
+    "ramsey/collection": {
+        "version": "1.2.2"
+    },
+    "ramsey/uuid": {
+        "version": "4.2.3"
+    },
+    "react/promise": {
+        "version": "v2.8.0"
+    },
     "sebastian/cli-parser": {
         "version": "1.0.1"
     },
@@ -288,6 +397,9 @@
     "sebastian/version": {
         "version": "3.0.2"
     },
+    "soyuka/contexts": {
+        "version": "3.3.3"
+    },
     "symfony/asset": {
         "version": "v5.4.0"
     },
@@ -323,6 +435,9 @@
     },
     "symfony/deprecation-contracts": {
         "version": "v3.0.0"
+    },
+    "symfony/doctrine-bridge": {
+        "version": "v5.4.1"
     },
     "symfony/dom-crawler": {
         "version": "v5.4.0"
@@ -417,6 +532,21 @@
     },
     "symfony/password-hasher": {
         "version": "v5.4.0"
+    },
+    "symfony/phpunit-bridge": {
+        "version": "6.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.3",
+            "ref": "97cb3dc7b0f39c7cfc4b7553504c9d7b7795de96"
+        },
+        "files": [
+            ".env.test",
+            "bin/phpunit",
+            "phpunit.xml.dist",
+            "tests/bootstrap.php"
+        ]
     },
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.23.1"

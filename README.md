@@ -67,6 +67,18 @@ initialize database
 make init
 ``` 
 
+initialize event store
+
+```
+make drop-and-create-event_store
+``` 
+
+initialize read model
+
+```
+make drop-and-create-read_model
+``` 
+
 Drop database
 
 ```

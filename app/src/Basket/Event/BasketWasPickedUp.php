@@ -26,7 +26,7 @@ class BasketWasPickedUp implements Serializable
         return ['basketId' => (string) $this->basketId];
     }
 
-    public static function deserialize(array $data)
+    public static function deserialize(array $data): BasketWasPickedUp
     {
         return new self(new BasketId($data['basketId']));
     }

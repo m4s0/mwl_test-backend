@@ -1,0 +1,29 @@
+Product\Model\Product:
+    attributes:
+        normalization_context:
+            groups: ['product_read']
+        denormalization_context:
+            api_allow_update: true
+            groups: ['product_write', 'product_avatar_write']
+        filters:
+            - 'App\Application\ApiPlatform\Filters\DeletedFilter'
+
+    collectionOperations:
+        get:
+            method: 'GET'
+            access_control: is_granted('VIEW', object)
+            normalization_context: {'groups': ['product_read_collection']}
+        post:
+            method: 'POST'
+            access_control: is_granted('CREATE', object)
+            normalization_context:
+                groups: ['product_post']
+
+    itemOperations:
+        get:
+            method: 'GET'
+            access_control: is_granted('VIEW', object)
+
+    properties:
+        productId:
+            identifier: true
