@@ -20,6 +20,11 @@ Domain\Basket\ReadModel\BasketReadModel:
         get:
             method: 'GET'
 
+    subresourceOperations:
+        add_product:
+            method: 'POST'
+            path: '/baskets/{basketId}/add'
+
     properties:
         id:
             identifier: true

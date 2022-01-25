@@ -22,11 +22,6 @@ Domain\Product\Model\Product:
             method: 'GET'
 #            access_control: is_granted('VIEW', object)
 
-    subresourceOperations:
-        add_product:
-            method: 'POST'
-            path: '/baskets/{basketId}/add'
-
     properties:
         productId:
             identifier: true
