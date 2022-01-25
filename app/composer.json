@@ -44,7 +44,7 @@
         "symfony/yaml": "5.4.*"
     },
     "require-dev": {
-        "api-platform/schema-generator": "dev-master",
+        "api-platform/schema-generator": "^4.0",
         "behat/behat": "^3.10",
         "coduo/php-matcher": "^6.0",
         "friends-of-behat/mink": "^1.9",

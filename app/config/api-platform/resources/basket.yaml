@@ -1,17 +1,29 @@
 Domain\Basket\ReadModel\BasketReadModel:
     shortName: 'Basket'
-    attributes:
-        normalization_context:
-            groups: ['basket_read']
+#    attributes:
+#        normalization_context:
+#            groups: ['basket_read']
+#        id:
+#            identifier: true
 
     collectionOperations:
         get:
             method: 'GET'
         post:
             method: 'POST'
+            input: App\Dto\CreateBasket
+            output: App\Dto\BasketOutput
+#            normalization_context:
+#                groups: ['product_post']
 
     itemOperations:
         get:
             method: 'GET'
-        put:
-            method: 'PUT'
+
+    properties:
+        id:
+            identifier: true
+        product:
+            subresource:
+                resourceClass: 'Domain\Product\Model\Product'
+                collection: false

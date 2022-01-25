@@ -116,3 +116,9 @@ make cs
 ```
 make stan
 ``` 
+
+#### Lists Docker containers
+
+```
+make ps
+```

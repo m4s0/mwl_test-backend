@@ -17,7 +17,7 @@ class ProductTest extends TestCase
     /**
      * @test
      */
-    public function it_should_creates_a_valid_product()
+    public function it_should_creates_a_valid_product(): void
     {
         $moneyParser = new DecimalMoneyParser(new ISOCurrencies());
         $productPrice = $moneyParser->parse('79.90', new Currency('EUR'));

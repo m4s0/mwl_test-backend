@@ -10,7 +10,7 @@ parameters:
     event_table_name: 'events'
     elasticsearch: '%env(ELASTICSEARCH_HOST)%'
     basket_index: 'basket'
-    products_path: '%kernel.project_dir%/../products.json'
+    products_path: '%kernel.project_dir%/products.json'
 
 services:
     # default configuration for services in *this* file
@@ -18,34 +18,33 @@ services:
         autowire: false
         autoconfigure: false
 
-    app.subscriber.request:
-        class: App\EventSubscriber\RequestSubscriber
-        tags:
-            - { name: 'kernel.event_subscriber' }
-
-    app.controller.product:
-        class: App\Controller\ProductController
-        arguments:
-            - '@product.repository'
-        public: true
-
-    app.controller.basket:
-        class: App\Controller\BasketController
-        arguments:
-            - '@broadway.command_handling.command_bus'
-            - '@broadway.uuid.generator'
-            - '@app.read_model.repository.basket'
-            - '@product.repository'
-        public: true
+#    app.controller.product:
+#        class: App\Controller\ProductController
+#        arguments:
+#            - '@product.repository'
+#        public: true
+#
+#    app.controller.basket:
+#        class: App\Controller\BasketController
+#        arguments:
+#            - '@broadway.command_handling.command_bus'
+#            - '@broadway.uuid.generator'
+#            - '@app.read_model.repository.basket'
+#            - '@product.repository'
+#        public: true
 
     product.repository_filesystem:
-        class: Product\Repository\FileSystem
+        class: Domain\Product\Repository\FileSystem
 
     product.repository:
-        class: Product\Repository\ProductRepository
+        class: Domain\Product\Repository\ProductRepository
         arguments:
             - '%products_path%'
             - '@product.repository_filesystem'
+
+###
+### BROADWAY ###
+###
 
     broadway.stack.request_id.monolog_processor:
         class: Qandidate\Stack\RequestId\MonologProcessor
@@ -79,3 +78,45 @@ services:
             - "@app.service.drop_and_create_event_store"
         tags:
             - { name: console.command }
+
+
+
+###
+### API PLATFORM ###
+###
+
+    App\OpenApi\JwtDecorator:
+        decorates: 'api_platform.openapi.factory'
+        arguments: ['@.inner']
+
+    App\DataProvider\BasketCollectionDataProvider:
+        arguments:
+            - "@app.read_model.repository.basket"
+        tags: [ { name: 'api_platform.collection_data_provider', priority: 2 } ]
+
+    App\DataProvider\ProductCollectionDataProvider:
+        arguments:
+            - '@product.repository'
+        tags: [ { name: 'api_platform.collection_data_provider', priority: 2 } ]
+
+    App\DataProvider\BasketItemDataProvider:
+        arguments:
+            - "@app.read_model.repository.basket"
+        tags: [ 'api_platform.item_data_provider' ]
+
+    App\DataProvider\ProductItemDataProvider:
+        arguments:
+            - '@product.repository'
+        tags: [ 'api_platform.item_data_provider' ]
+
+    App\DataPersister\BasketDataPersister:
+        arguments:
+            - '@broadway.command_handling.command_bus'
+            - '@broadway.uuid.generator'
+        tags: [ 'api_platform.data_persister' ]
+
+    App\DataTransformer\BasketInputDataTransformer:
+        tags: [ 'api_platform.data_transformer' ]
+
+    App\DataTransformer\BasketOutputDataTransformer:
+        tags: [ 'api_platform.data_transformer' ]

@@ -74,3 +74,7 @@ stan:
 .PHONY: generate-keypair
 generate-keypair:
 	cd docker && docker-compose run --rm php-fpm sh -c 'composer generate-keypair'
+
+.PHONY: ps
+ps:
+	cd docker && docker-compose ps

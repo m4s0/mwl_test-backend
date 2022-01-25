@@ -18,7 +18,7 @@ class BasketReadModelTest extends TestCase
     /**
      * @test
      */
-    public function serialize()
+    public function serialize(): void
     {
         $basketReadModel = new BasketReadModel('dce0d45d-da31-4c30-b5c9-d210dc702f7d');
         $basketReadModel->addProduct(
@@ -99,7 +99,7 @@ class BasketReadModelTest extends TestCase
     /**
      * @test
      */
-    public function deserialize()
+    public function deserialize(): void
     {
         $data = [
             'basketId' => 'dce0d45d-da31-4c30-b5c9-d210dc702f7d',

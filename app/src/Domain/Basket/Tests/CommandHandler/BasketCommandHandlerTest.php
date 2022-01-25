@@ -31,7 +31,7 @@ class BasketCommandHandlerTest extends CommandHandlerScenarioTestCase
     /**
      * @test
      */
-    public function it_picks_up_a_basket()
+    public function it_picks_up_a_basket(): void
     {
         $basketId = new BasketId('81b56c94-0946-4b2a-864d-59f2132049f8');
         $this->scenario
@@ -45,7 +45,7 @@ class BasketCommandHandlerTest extends CommandHandlerScenarioTestCase
     /**
      * @test
      */
-    public function it_adds_a_product_to_a_basket()
+    public function it_adds_a_product_to_a_basket(): void
     {
         $basketId = new BasketId('81b56c94-0946-4b2a-864d-59f2132049f8');
 
@@ -75,7 +75,7 @@ class BasketCommandHandlerTest extends CommandHandlerScenarioTestCase
     /**
      * @test
      */
-    public function multiple_products_can_be_added_to_a_basket()
+    public function multiple_products_can_be_added_to_a_basket(): void
     {
         $basketId = new BasketId('81b56c94-0946-4b2a-864d-59f2132049f8');
 
@@ -113,7 +113,7 @@ class BasketCommandHandlerTest extends CommandHandlerScenarioTestCase
     /**
      * @test
      */
-    public function a_product_can_be_added_to_a_basket_multiple_times()
+    public function a_product_can_be_added_to_a_basket_multiple_times(): void
     {
         $basketId = new BasketId('81b56c94-0946-4b2a-864d-59f2132049f8');
 
@@ -152,7 +152,7 @@ class BasketCommandHandlerTest extends CommandHandlerScenarioTestCase
     /**
      * @test
      */
-    public function it_removes_a_product_that_was_added()
+    public function it_removes_a_product_that_was_added(): void
     {
         $basketId = new BasketId('81b56c94-0946-4b2a-864d-59f2132049f8');
 
@@ -177,7 +177,7 @@ class BasketCommandHandlerTest extends CommandHandlerScenarioTestCase
     /**
      * @test
      */
-    public function it_throw_an_exception_when_removing_a_product_that_is_not_in_a_basket()
+    public function it_throw_an_exception_when_removing_a_product_that_is_not_in_a_basket(): void
     {
         $this->expectException(ProductNotInBasketException::class);
 
@@ -194,7 +194,7 @@ class BasketCommandHandlerTest extends CommandHandlerScenarioTestCase
     /**
      * @test
      */
-    public function it_throw_an_exception_when_removing_a_product_that_already_has_been_removed()
+    public function it_throw_an_exception_when_removing_a_product_that_already_has_been_removed(): void
     {
         $this->expectException(ProductNotInBasketException::class);
 
@@ -226,7 +226,7 @@ class BasketCommandHandlerTest extends CommandHandlerScenarioTestCase
     /**
      * @test
      */
-    public function it_updates_quantity_of_a_product_in_a_basket()
+    public function it_updates_quantity_of_a_product_in_a_basket(): void
     {
         $basketId = new BasketId('81b56c94-0946-4b2a-864d-59f2132049f8');
 
@@ -277,7 +277,7 @@ class BasketCommandHandlerTest extends CommandHandlerScenarioTestCase
     /**
      * @test
      */
-    public function it_throw_an_exception_when_updating_a_product_that_is_not_in_a_basket()
+    public function it_throw_an_exception_when_updating_a_product_that_is_not_in_a_basket(): void
     {
         $this->expectException(ProductNotInBasketException::class);
 
@@ -313,7 +313,7 @@ class BasketCommandHandlerTest extends CommandHandlerScenarioTestCase
     /**
      * @test
      */
-    public function it_throw_an_exception_when_updating_a_product_and_quantity_is_not_valid()
+    public function it_throw_an_exception_when_updating_a_product_and_quantity_is_not_valid(): void
     {
         $this->expectException(ProductNotInBasketException::class);
 
@@ -344,7 +344,7 @@ class BasketCommandHandlerTest extends CommandHandlerScenarioTestCase
     /**
      * @test
      */
-    public function it_checks_out_a_basket()
+    public function it_checks_out_a_basket(): void
     {
         $basketId = new BasketId('81b56c94-0946-4b2a-864d-59f2132049f8');
         $this->scenario
@@ -382,7 +382,7 @@ class BasketCommandHandlerTest extends CommandHandlerScenarioTestCase
     /**
      * @test
      */
-    public function it_cannot_checks_out_an_empty_basket()
+    public function it_cannot_checks_out_an_empty_basket(): void
     {
         $this->expectException(EmptyBasketException::class);
 
@@ -399,7 +399,7 @@ class BasketCommandHandlerTest extends CommandHandlerScenarioTestCase
     /**
      * @test
      */
-    public function it_cannot_checks_out_a_basket_that_has_been_emptied()
+    public function it_cannot_checks_out_a_basket_that_has_been_emptied(): void
     {
         $this->expectException(EmptyBasketException::class);
 
@@ -424,7 +424,7 @@ class BasketCommandHandlerTest extends CommandHandlerScenarioTestCase
     /**
      * @test
      */
-    public function nothing_happens_when_checking_out_a_basket_for_a_second_time()
+    public function nothing_happens_when_checking_out_a_basket_for_a_second_time(): void
     {
         $this->expectException(BasketAlreadyCheckedOutException::class);
 

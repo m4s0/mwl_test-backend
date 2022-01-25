@@ -1,29 +1,31 @@
 Domain\Product\Model\Product:
     shortName: 'Product'
-    attributes:
-        normalization_context:
-            groups: ['product_read']
-        denormalization_context:
-            api_allow_update: true
-            groups: ['product_write', 'product_avatar_write']
-        filters:
-            - 'App\Application\ApiPlatform\Filters\DeletedFilter'
+#    attributes:
+#        normalization_context:
+#            groups: ['product_read']
+#        denormalization_context:
+#            api_allow_update: true
+#            groups: ['product_write', 'product_avatar_write']
+#        filters:
+#            - 'App\Application\ApiPlatform\Filters\DeletedFilter'
+#        productId:
+#            identifier: true
 
     collectionOperations:
         get:
             method: 'GET'
-            access_control: is_granted('VIEW', object)
-            normalization_context: {'groups': ['product_read_collection']}
-        post:
-            method: 'POST'
-            access_control: is_granted('CREATE', object)
-            normalization_context:
-                groups: ['product_post']
+#            access_control: is_granted('VIEW', object)
+#            normalization_context: {'groups': ['product_read_collection']}
 
     itemOperations:
         get:
             method: 'GET'
-            access_control: is_granted('VIEW', object)
+#            access_control: is_granted('VIEW', object)
+
+    subresourceOperations:
+        add_product:
+            method: 'POST'
+            path: '/baskets/{basketId}/add'
 
     properties:
         productId:

@@ -23,7 +23,7 @@ class BasketProjectorTest extends ProjectorScenarioTestCase
     /**
      * @test
      */
-    public function it_picks_up_a_basket()
+    public function it_picks_up_a_basket(): void
     {
         $expectedBasketReadModel = new BasketReadModel('480b8f7e-9dcc-4335-aecb-4bf4b4fb2858');
         Assert::assertFalse($expectedBasketReadModel->hasBeenCheckedOut());
@@ -84,7 +84,7 @@ class BasketProjectorTest extends ProjectorScenarioTestCase
     /**
      * @test
      */
-    public function it_removes_product_from_basket()
+    public function it_removes_product_from_basket(): void
     {
         $expectedBasketReadModel = new BasketReadModel('480b8f7e-9dcc-4335-aecb-4bf4b4fb2858');
         $expectedBasketReadModel->addProduct(
@@ -157,7 +157,7 @@ class BasketProjectorTest extends ProjectorScenarioTestCase
     /**
      * @test
      */
-    public function it_updates_product_from_basket()
+    public function it_updates_product_from_basket(): void
     {
         $expectedBasketReadModel = new BasketReadModel('480b8f7e-9dcc-4335-aecb-4bf4b4fb2858');
         $expectedBasketReadModel->addProduct(
@@ -241,7 +241,7 @@ class BasketProjectorTest extends ProjectorScenarioTestCase
     /**
      * @test
      */
-    public function it_checks_out_a_basket()
+    public function it_checks_out_a_basket(): void
     {
         $expectedBasketReadModel = new BasketReadModel('480b8f7e-9dcc-4335-aecb-4bf4b4fb2858');
         $expectedBasketReadModel->addProduct(
