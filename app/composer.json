@@ -37,7 +37,10 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "ocramius/package-versions": true
+        }
     },
     "autoload": {
         "psr-4": {
