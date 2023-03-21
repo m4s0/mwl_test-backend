@@ -22,14 +22,16 @@ RUN apk --update --no-cache add bash \
    && apk add php7-posix \
    && apk add php7-intl \
    && apk add php7-opcache  \
-   && apk add make
-#   && apk add $PHPIZE_DEPS \
-#   && pecl install xdebug
+   && apk add make \
+   && apk add postgresql-dev \
+   && apk add $PHPIZE_DEPS \
+   && pecl install xdebug-2.8.0
 
 ADD xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
-RUN docker-php-ext-install pdo_mysql
-#RUN docker-php-ext-enable xdebug
+RUN #docker-php-ext-install pdo_mysql
+RUN docker-php-ext-install pdo_pgsql
+RUN docker-php-ext-enable xdebug
 
 RUN mkdir -p /var/app
 RUN adduser --disabled-password app && chown -R app:app /var/app

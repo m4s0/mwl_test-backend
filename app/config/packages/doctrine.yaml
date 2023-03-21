@@ -1,12 +1,16 @@
 doctrine:
     dbal:
         connections:
-            default:
+            mysql:
                 driver: 'pdo_mysql'
-                server_version: '5.7'
+                server_version: '8.0'
                 charset: utf8mb4
                 default_table_options:
                     charset: utf8mb4
                     collate: utf8mb4_unicode_ci
 
+                url: '%env(resolve:DATABASE_URL)%'
+
+            postgresql:
+                driver: 'pdo_pgsql'
                 url: '%env(resolve:DATABASE_URL)%'

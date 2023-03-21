@@ -2,20 +2,31 @@ version: '3'
 
 services:
   db:
-    container_name: db
-    restart: always
-    build:
-      context: ./db
+    image: postgres:14.6
     environment:
-      - MYSQL_DATABASE=${DATABASE_NAME}
-      - MYSQL_USER=${DATABASE_USER}
-      - MYSQL_PASSWORD=${DATABASE_PASSWORD}
-      - MYSQL_ROOT_PASSWORD=${DATABASE_ROOT_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_HOST_AUTH_METHOD: trust
     ports:
-      - "3306:3306"
+      - 5430:5432
     volumes:
-      - mysql_data:/var/lib/mysql
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - db-data:/var/lib/postgresql/data
+      - ./db/scripts:/docker-entrypoint-initdb.d
+
+#   db:
+#     image: mysql:8.0
+#     restart: always
+#     environment:
+#       - MYSQL_DATABASE=${DATABASE_NAME}
+#       - MYSQL_USER=${DATABASE_USER}
+#       - MYSQL_PASSWORD=${DATABASE_PASSWORD}
+#       - MYSQL_ROOT_PASSWORD=${DATABASE_ROOT_PASSWORD}
+#     ports:
+#       - "3306:3306"
+#     volumes:
+#       - db-data:/var/lib/mysql
+#       - ./db/scripts:/docker-entrypoint-initdb.d
 
   php-fpm:
     container_name: php-fpm
@@ -28,7 +39,8 @@ services:
       - PHP_IDE_CONFIG=${PHP_IDE_CONFIG}
       - APP_ENV=${APP_ENV}
       - APP_SECRET=${APP_SECRET}
-      - DATABASE_URL=mysql://${DATABASE_USER}:${DATABASE_PASSWORD}@db:3306/${DATABASE_NAME}?serverVersion=5.7
+#       - DATABASE_URL=mysql://${DATABASE_USER}:${DATABASE_PASSWORD}@db:3306/${DATABASE_NAME}?serverVersion=8.0
+      - DATABASE_URL=postgresql://${DATABASE_USER}:${DATABASE_PASSWORD}@db:5432/${DATABASE_NAME}?schema=public
       - ELASTICSEARCH_HOST=${ELASTICSEARCH_HOST}
     volumes:
       - ../app:/var/app
@@ -56,5 +68,5 @@ services:
 #
 
 volumes:
-  mysql_data:
+  db-data:
     name: mwl_mysql

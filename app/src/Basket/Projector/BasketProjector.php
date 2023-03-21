@@ -24,40 +24,40 @@ class BasketProjector extends Projector
 
     protected function applyBasketWasPickedUp(BasketWasPickedUp $event): void
     {
-        $readModel = new BasketReadModel((string) $event->getBasketId());
+/*        $readModel = new BasketReadModel((string) $event->getBasketId());
 
-        $this->repository->save($readModel);
+        $this->repository->save($readModel);*/
     }
 
     protected function applyProductWasAddedToBasket(ProductWasAddedToBasket $event): void
     {
-        $readModel = $this->repository->find($event->getBasketId());
+/*        $readModel = $this->repository->find($event->getBasketId());
 
         $readModel->addProduct($event);
-        $this->repository->save($readModel);
+        $this->repository->save($readModel);*/
     }
 
     protected function applyProductWasRemovedFromBasket(ProductWasRemovedFromBasket $event): void
     {
-        $readModel = $this->repository->find($event->getBasketId());
+/*        $readModel = $this->repository->find($event->getBasketId());
 
         $readModel->removeProduct($event);
-        $this->repository->save($readModel);
+        $this->repository->save($readModel);*/
     }
 
     protected function applyProductQuantityWasUpdated(ProductQuantityWasUpdated $event): void
     {
-        $readModel = $this->repository->find($event->getBasketId());
+/*        $readModel = $this->repository->find($event->getBasketId());
 
         $readModel->update($event);
-        $this->repository->save($readModel);
+        $this->repository->save($readModel);*/
     }
 
     protected function applyBasketCheckedOut(BasketCheckedOut $event): void
     {
-        $readModel = $this->repository->find($event->getBasketId());
+/*        $readModel = $this->repository->find($event->getBasketId());
 
         $readModel->setHasBeenCheckedOut();
-        $this->repository->save($readModel);
+        $this->repository->save($readModel);*/
     }
 }

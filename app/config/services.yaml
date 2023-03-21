@@ -53,7 +53,9 @@ services:
     app.service.drop_and_create_event_store:
         class: App\Service\DropAndCreateEventStore
         arguments:
-            - "@doctrine.dbal.default_connection"
+#             - "@doctrine.dbal.default_connection"
+#             - "@doctrine.dbal.mysql_connection"
+            - "@doctrine.dbal.postgresql_connection"
             - "@broadway.event_store.dbal"
 
     app.command.drop_and_create_read_model:
